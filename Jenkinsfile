@@ -5,14 +5,14 @@ pipeline{
             steps{
                 echo "========executing A========"
                 sh "mvn test"
-                sleep 10
+                sleep 5
             }
         }
         stage("maven Build"){
             steps{
                 echo "========executing A========"
                 sh "mvn package"
-                sleep 10
+                sleep 5
             }
         }
         stage("Deploy to Test Environment"){
