@@ -18,6 +18,7 @@ pipeline{
         stage("Deploy to Test Environment"){
             steps{
                 echo "========executing A========"
+                deploy adapters: [tomcat9(credentialsId: 'TOMCAT_DEVOPS', path: '', url: 'http://192.168.33.26:8080/')], contextPath: 'devops', war: '**/*.war'
             }
         }
     }
