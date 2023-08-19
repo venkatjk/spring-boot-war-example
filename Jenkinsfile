@@ -1,30 +1,35 @@
 pipeline{
     agent any
-    tools {
-        maven 'Maven'
-    }
     stages{
-        stage("Test"){
+        stage("maven test"){
             steps{
-                echo "========mvn test========"
+                echo "========executing A========"
                 sh "mvn test"
+                sleep 10
             }
-            
         }
-        stage("Build"){
+        stage("maven Build"){
             steps{
+                echo "========executing A========"
                 sh "mvn package"
-                echo "========mvn package========"
+                sleep 10
             }
-            
         }
-        stage("Deploy"){
+        stage("Deploy to Test Environment"){
             steps{
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://192.168.33.18:8080')], contextPath: '/venkat', war: '**/*.war'
-                echo "========Deploy========"
+                echo "========executing A========"
             }
-            
         }
     }
-    
+    post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
+    }
 }
